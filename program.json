@@ -1,0 +1,45 @@
+{
+  "input": "5",
+  "seq": {
+    "left": { "read": "n" },
+    "right": {
+      "seq": {
+        "left": { "assn": { "dst": "f", "src": { "const": 1 } } },
+        "right": {
+          "seq": {
+            "left": {
+              "while": {
+                "cond": { "var": "n" },
+                "body": {
+                  "seq": {
+                    "left": {
+                      "assn": {
+                        "dst": "f",
+                        "src": {
+                          "binop": "*",
+                          "left": { "var": "f" },
+                          "right": { "var": "n" }
+                        }
+                      }
+                    },
+                    "right": {
+                      "assn": {
+                        "dst": "n",
+                        "src": {
+                          "binop": "-",
+                          "left": { "var": "n" },
+                          "right": { "const": 1 }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": { "write": { "var": "f" } }
+          }
+        }
+      }
+    }
+  }
+}
