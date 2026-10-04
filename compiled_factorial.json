@@ -1,0 +1,21 @@
+[
+  "READ",
+  {"ST": "n"},
+  {"CONST": 1},
+  {"ST": "f"},
+  {"LABEL": "while_start_1"},
+  {"LD": "n"},
+  {"JZ": "while_end_2"},
+  {"LD": "f"},
+  {"LD": "n"},
+  {"BINOP": "*"},
+  {"ST": "f"},
+  {"LD": "n"},
+  {"CONST": 1},
+  {"BINOP": "-"},
+  {"ST": "n"},
+  {"JMP": "while_start_1"},
+  {"LABEL": "while_end_2"},
+  {"LD": "f"},
+  "WRITE"
+]

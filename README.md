@@ -4,6 +4,7 @@
 
 - **ДЗ 1:** интерпретатор, который выполняет AST программы в формате JSON
 - **ДЗ 2:** интерпретатор инструкций стековой машины
+- **ДЗ 3:** компилятор JSON-AST (ДЗ 1) в инструкции стековой машины (ДЗ 2)
 
 ## Запуск ДЗ 1
 
@@ -28,6 +29,24 @@ Abstract Machine Compiler/Interpreter. Входные числа передаю�
 
 Ожидаемые результаты: `7` и `120` соответственно.
 
+## Запуск ДЗ 3
+
+Компилятор читает AST в том же формате, что и ДЗ 1, и выдаёт JSON инструкций
+стековой машины (формат ДЗ 2).
+
+```powershell
+# скомпилировать в файл и выполнить на стековой машине
+python compiler.py program.json -o compiled_factorial.json
+"5" | python stack_machine.py compiled_factorial.json
+
+# вывести JSON в консоль / текстовый листинг / читать AST из stdin
+python compiler.py program.json
+python compiler.py program.json --asm
+Get-Content -Raw program.json | python compiler.py
+```
+
+Ожидаемый результат для `program.json` (факториал 5) - `120`
+
 ## Основные файлы
 
 - `main.py` - запуск первой домашки.
@@ -38,6 +57,8 @@ Abstract Machine Compiler/Interpreter. Входные числа передаю�
 - `program.json` - пример программы для ДЗ 1.
 - `machine_factorial.json` - пример программы для ДЗ 2.
 - `machine_example.json` - JSON инструкций со второго сайта.
+- `compiler.py` - компилятор JSON-AST в инструкции стековой машины.
+- `compiled_factorial.json` - результат компиляции `program.json`.
 
 Машина поддерживает `READ`, `WRITE`, `LD`, `ST`, `CONST`, `BINOP`, `LABEL`,
 `JMP`, `JZ`, `JNZ`. JSON содержит массив: `"READ"`, `"WRITE"` и объекты
@@ -48,6 +69,7 @@ Abstract Machine Compiler/Interpreter. Входные числа передаю�
 ```powershell
 python tests.py
 python -m unittest -v test_stack_machine
+python -m unittest -v test_compiler
 ```
 
 ## Авторы
@@ -57,3 +79,5 @@ Grankina Elizabeth
 Sadygov Huseyn
 
 Yaroslav Grigoriev
+
+Berezhnoy Yan
