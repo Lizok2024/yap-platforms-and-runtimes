@@ -1,0 +1,6 @@
+[
+  {"CONST": 7},
+  {"CONST": 8},
+  {"BINOP": "+"},
+  "WRITE"
+]

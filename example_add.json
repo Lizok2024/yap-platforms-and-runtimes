@@ -1,0 +1,9 @@
+{
+  "write": {
+    "binop": {
+      "op": "+",
+      "left": {"const": 7},
+      "right": {"const": 8}
+    }
+  }
+}
