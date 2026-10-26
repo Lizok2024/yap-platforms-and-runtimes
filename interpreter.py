@@ -62,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
             print(Interpreter.sum_arrays(json.loads(source)))
         else:
             Interpreter().interpret_text(source)
-    except (OSError, json.JSONDecodeError, TypeError, ValueError, EOFError, NameError, RuntimeError) as error:
+    except (OSError, json.JSONDecodeError, TypeError, ValueError, IndexError, EOFError, NameError, RuntimeError) as error:
         print(f"Interpreter error: {error}", file=sys.stderr)
         return 1
 

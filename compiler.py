@@ -11,10 +11,12 @@ from ast_nodes import (
     CompoundAssignNode,
     ConstNode,
     DoWhileNode,
+    ElemNode,
     ForNode,
     IfNode,
     ReadNode,
     SeqNode,
+    SexpNode,
     SkipNode,
     UnOpNode,
     VarNode,
@@ -68,7 +70,9 @@ class Compiler:
 
 
 
-    def _emit(self, opcode: str, argument: str | int | None = None) -> None:
+    def _emit(
+        self, opcode: str, argument: str | int | tuple[str, int] | None = None
+    ) -> None:
         self.code.append(Instruction(opcode, argument))
 
     def _label(self, hint: str) -> str:
@@ -157,7 +161,7 @@ class Compiler:
                 self.stmt(node.else_branch)
             self._emit("LABEL", end)
 
-        elif isinstance(node, (VarNode, BinOpNode, UnOpNode)):
+        elif isinstance(node, (VarNode, BinOpNode, UnOpNode, SexpNode, ElemNode)):
 
 
             self.expr(node)
@@ -176,6 +180,16 @@ class Compiler:
 
         elif isinstance(node, VarNode):
             self._emit("LD", node.name)
+
+        elif isinstance(node, SexpNode):
+            for arg in node.args:
+                self.expr(arg)
+            self._emit("SEXP", (node.name, len(node.args)))
+
+        elif isinstance(node, ElemNode):
+            self.expr(node.expr)
+            self.expr(node.index)
+            self._emit("ELEM")
 
         elif isinstance(node, BinOpNode):
             if node.op in NOT_OPS and node.right is None:
@@ -264,7 +278,10 @@ def compile_text(text: str) -> list[Instruction]:
 def to_json(program: list[Instruction]) -> list:
 
     return [
-        i.opcode if i.argument is None else {i.opcode: i.argument} for i in program
+        i.opcode if i.argument is None else {
+            i.opcode: list(i.argument) if i.opcode == "SEXP" else i.argument
+        }
+        for i in program
     ]
 
 

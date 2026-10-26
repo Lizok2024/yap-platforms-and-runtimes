@@ -7,10 +7,12 @@ from ast_nodes import (
     CompoundAssignNode,
     ConstNode,
     DoWhileNode,
+    ElemNode,
     ForNode,
     IfNode,
     ReadNode,
     SeqNode,
+    SexpNode,
     SkipNode,
     UnOpNode,
     VarNode,
@@ -35,6 +37,13 @@ class ASTParser:
         if isinstance(val, dict):
             return cls._get(val, "name", "var", "id", "value", "target", "dst", default=val)
         return val
+
+    @classmethod
+    def _required_expression(cls, raw: Any, description: str) -> ASTNode:
+        node = cls.parse(raw)
+        if node is None:
+            raise ValueError(f"Missing expression: {description}")
+        return node
 
     @classmethod
     def parse(cls, raw: Any) -> Optional[ASTNode]:
@@ -74,11 +83,16 @@ class ASTParser:
             else:
                 for tag in (
                     "seq", "while", "dowhile", "for", "if", "binop", "binary",
-                    "assn", "assign", "compoundassign", "read", "write", "unary"
+                    "assn", "assign", "compoundassign", "read", "write", "unary",
+                    "sexp", "elem",
                 ):
                     if tag in data:
                         node_type = tag
-                        payload = data[tag] if isinstance(data[tag], dict) else data
+                        payload = (
+                            data[tag]
+                            if tag not in ("sexp", "elem") and isinstance(data[tag], dict)
+                            else data
+                        )
                         break
 
         if node_type is None:
@@ -116,8 +130,12 @@ class ASTParser:
 
         elif node_type == "write":
             expr = payload
-            if isinstance(payload, dict) and any(k in payload for k in ("expr", "expression", "value", "arg", "var")):
-                expr = cls._get(payload, "expr", "expression", "value", "arg", default=payload)
+            if isinstance(payload, dict):
+                typed_expression = payload is not data and any(
+                    key in payload for key in ("type", "kind", "nodeType", "tag")
+                )
+                if not typed_expression:
+                    expr = cls._get(payload, "expr", "expression", "value", "arg", default=payload)
             return WriteNode(cls.parse(expr))
 
         elif node_type in ("assign", "assn"):
@@ -166,6 +184,28 @@ class ASTParser:
             op = cls._get(payload, "op", "operator")
             operand = cls.parse(cls._get(payload, "operand", "expr", "value", "arg"))
             return UnOpNode(op, operand)
+
+        elif node_type == "sexp":
+            if isinstance(payload, str):
+                name = payload
+                args = data.get("args", [])
+            else:
+                name = cls._get(payload, "sexp", "name", "constructor")
+                args = cls._get(payload, "args", "arguments", default=[])
+            if not isinstance(args, list):
+                raise ValueError("S-expression args must be an array of expressions")
+            return SexpNode(name, [
+                cls._required_expression(arg, f"argument {index} of {name}")
+                for index, arg in enumerate(args)
+            ])
+
+        elif node_type == "elem":
+            expr = cls._get(payload, "elem", "expr", "expression", "target", "value")
+            index = cls._get(payload, "index", "idx")
+            return ElemNode(
+                cls._required_expression(expr, "indexed value"),
+                cls._required_expression(index, "element index"),
+            )
 
         elif node_type in ("identifier", "var"):
             name = payload if isinstance(payload, str) else cls._get(payload, "name", "value", "id", "var")

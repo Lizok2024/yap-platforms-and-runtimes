@@ -1,0 +1,15 @@
+{
+  x = Pair(1, 2);
+  write(x);
+  write(x[0]);
+  write(x[1]);
+  nested = Pair(Pair(3, 4), Empty);
+  write(nested);
+  write(nested[0][1]);
+  list = {1, 2, 3, 4};
+  write(list);
+  write(list[0]);
+  write(list[1]);
+  write({});
+  write({Pair(5, 6), {7, 8}});
+}

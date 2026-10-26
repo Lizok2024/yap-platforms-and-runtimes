@@ -1,0 +1,207 @@
+[
+  {
+    "CONST": 1
+  },
+  {
+    "CONST": 2
+  },
+  {
+    "SEXP": [
+      "Pair",
+      2
+    ]
+  },
+  {
+    "ST": "x"
+  },
+  {
+    "LD": "x"
+  },
+  "WRITE",
+  {
+    "LD": "x"
+  },
+  {
+    "CONST": 0
+  },
+  "ELEM",
+  "WRITE",
+  {
+    "LD": "x"
+  },
+  {
+    "CONST": 1
+  },
+  "ELEM",
+  "WRITE",
+  {
+    "CONST": 3
+  },
+  {
+    "CONST": 4
+  },
+  {
+    "SEXP": [
+      "Pair",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "Empty",
+      0
+    ]
+  },
+  {
+    "SEXP": [
+      "Pair",
+      2
+    ]
+  },
+  {
+    "ST": "nested"
+  },
+  {
+    "LD": "nested"
+  },
+  "WRITE",
+  {
+    "LD": "nested"
+  },
+  {
+    "CONST": 0
+  },
+  "ELEM",
+  {
+    "CONST": 1
+  },
+  "ELEM",
+  "WRITE",
+  {
+    "CONST": 1
+  },
+  {
+    "CONST": 2
+  },
+  {
+    "CONST": 3
+  },
+  {
+    "CONST": 4
+  },
+  {
+    "SEXP": [
+      "nil",
+      0
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "ST": "list"
+  },
+  {
+    "LD": "list"
+  },
+  "WRITE",
+  {
+    "LD": "list"
+  },
+  {
+    "CONST": 0
+  },
+  "ELEM",
+  "WRITE",
+  {
+    "LD": "list"
+  },
+  {
+    "CONST": 1
+  },
+  "ELEM",
+  "WRITE",
+  {
+    "SEXP": [
+      "nil",
+      0
+    ]
+  },
+  "WRITE",
+  {
+    "CONST": 5
+  },
+  {
+    "CONST": 6
+  },
+  {
+    "SEXP": [
+      "Pair",
+      2
+    ]
+  },
+  {
+    "CONST": 7
+  },
+  {
+    "CONST": 8
+  },
+  {
+    "SEXP": [
+      "nil",
+      0
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "nil",
+      0
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  {
+    "SEXP": [
+      "cons",
+      2
+    ]
+  },
+  "WRITE"
+]

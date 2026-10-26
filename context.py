@@ -1,4 +1,5 @@
 from environment import Environment
+from runtime_values import format_value
 
 
 class ExecutionContext:
@@ -15,4 +16,4 @@ class ExecutionContext:
         return int(token)
 
     def write(self, value):
-        print(value)
+        print(format_value(value))

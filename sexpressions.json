@@ -1,0 +1,253 @@
+{
+  "seq": {
+    "left": {
+      "assn": {
+        "dst": "x",
+        "src": {
+          "sexp": "Pair",
+          "args": [
+            {
+              "const": 1
+            },
+            {
+              "const": 2
+            }
+          ]
+        }
+      }
+    },
+    "right": {
+      "seq": {
+        "left": {
+          "write": {
+            "var": "x"
+          }
+        },
+        "right": {
+          "seq": {
+            "left": {
+              "write": {
+                "elem": {
+                  "var": "x"
+                },
+                "index": {
+                  "const": 0
+                }
+              }
+            },
+            "right": {
+              "seq": {
+                "left": {
+                  "write": {
+                    "elem": {
+                      "var": "x"
+                    },
+                    "index": {
+                      "const": 1
+                    }
+                  }
+                },
+                "right": {
+                  "seq": {
+                    "left": {
+                      "assn": {
+                        "dst": "nested",
+                        "src": {
+                          "sexp": "Pair",
+                          "args": [
+                            {
+                              "sexp": "Pair",
+                              "args": [
+                                {
+                                  "const": 3
+                                },
+                                {
+                                  "const": 4
+                                }
+                              ]
+                            },
+                            {
+                              "sexp": "Empty",
+                              "args": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "right": {
+                      "seq": {
+                        "left": {
+                          "write": {
+                            "var": "nested"
+                          }
+                        },
+                        "right": {
+                          "seq": {
+                            "left": {
+                              "write": {
+                                "elem": {
+                                  "elem": {
+                                    "var": "nested"
+                                  },
+                                  "index": {
+                                    "const": 0
+                                  }
+                                },
+                                "index": {
+                                  "const": 1
+                                }
+                              }
+                            },
+                            "right": {
+                              "seq": {
+                                "left": {
+                                  "assn": {
+                                    "dst": "list",
+                                    "src": {
+                                      "sexp": "cons",
+                                      "args": [
+                                        {
+                                          "const": 1
+                                        },
+                                        {
+                                          "sexp": "cons",
+                                          "args": [
+                                            {
+                                              "const": 2
+                                            },
+                                            {
+                                              "sexp": "cons",
+                                              "args": [
+                                                {
+                                                  "const": 3
+                                                },
+                                                {
+                                                  "sexp": "cons",
+                                                  "args": [
+                                                    {
+                                                      "const": 4
+                                                    },
+                                                    {
+                                                      "sexp": "nil",
+                                                      "args": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                "right": {
+                                  "seq": {
+                                    "left": {
+                                      "write": {
+                                        "var": "list"
+                                      }
+                                    },
+                                    "right": {
+                                      "seq": {
+                                        "left": {
+                                          "write": {
+                                            "elem": {
+                                              "var": "list"
+                                            },
+                                            "index": {
+                                              "const": 0
+                                            }
+                                          }
+                                        },
+                                        "right": {
+                                          "seq": {
+                                            "left": {
+                                              "write": {
+                                                "elem": {
+                                                  "var": "list"
+                                                },
+                                                "index": {
+                                                  "const": 1
+                                                }
+                                              }
+                                            },
+                                            "right": {
+                                              "seq": {
+                                                "left": {
+                                                  "write": {
+                                                    "sexp": "nil",
+                                                    "args": []
+                                                  }
+                                                },
+                                                "right": {
+                                                  "write": {
+                                                    "sexp": "cons",
+                                                    "args": [
+                                                      {
+                                                        "sexp": "Pair",
+                                                        "args": [
+                                                          {
+                                                            "const": 5
+                                                          },
+                                                          {
+                                                            "const": 6
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "sexp": "cons",
+                                                        "args": [
+                                                          {
+                                                            "sexp": "cons",
+                                                            "args": [
+                                                              {
+                                                                "const": 7
+                                                              },
+                                                              {
+                                                                "sexp": "cons",
+                                                                "args": [
+                                                                  {
+                                                                    "const": 8
+                                                                  },
+                                                                  {
+                                                                    "sexp": "nil",
+                                                                    "args": []
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "sexp": "nil",
+                                                            "args": []
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

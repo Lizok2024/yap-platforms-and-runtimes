@@ -2,10 +2,11 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from context import ExecutionContext
+from runtime_values import SExpression, get_element, require_int
 
 
 def truth(value: Any) -> bool:
-    return value != 0
+    return require_int(value) != 0
 
 
 class ASTNode(ABC):
@@ -34,6 +35,27 @@ class VarNode(ASTNode):
 
     def eval(self, ctx: ExecutionContext) -> Any:
         return ctx.env.get(self.name)
+
+
+class SexpNode(ASTNode):
+    def __init__(self, name: str, args: list[ASTNode]) -> None:
+        SExpression(name)
+        self.name = name
+        self.args = args
+
+    def eval(self, ctx: ExecutionContext) -> SExpression:
+        return SExpression(self.name, tuple(arg.eval(ctx) for arg in self.args))
+
+
+class ElemNode(ASTNode):
+    def __init__(self, expr: ASTNode, index: ASTNode) -> None:
+        self.expr = expr
+        self.index = index
+
+    def eval(self, ctx: ExecutionContext) -> Any:
+        value = self.expr.eval(ctx)
+        index = self.index.eval(ctx)
+        return get_element(value, index)
 
 
 class SeqNode(ASTNode):
@@ -182,6 +204,8 @@ class BinOpNode(ASTNode):
 
     @staticmethod
     def _apply_op(op: str, left: Any, right: Any) -> Any:
+        left = require_int(left)
+        right = require_int(right)
         if op in ("+", "Plus"):
             return left + right
         if op in ("-", "Minus"):
@@ -222,6 +246,7 @@ class UnOpNode(ASTNode):
 
     @staticmethod
     def _apply_op(op: str, value: Any) -> Any:
+        value = require_int(value)
         if op in ("!", "not", "Not", "LogicalNot"):
             return 1 if not truth(value) else 0
         if op in ("-", "Minus"):
